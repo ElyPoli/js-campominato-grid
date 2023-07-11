@@ -12,3 +12,46 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 - con “difficile” => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 */
 
+// Dichiaro variabili
+const btnCreate = document.querySelector(".btn-create");
+const gridCreate = document.getElementById("grid-create");
+
+btnCreate.addEventListener("click", onBtnCreate); // Richiamo la funzione click sul pulsante
+
+
+// Funzione click sul pulsante
+function onBtnCreate() {
+    const numberOfCell = 100;
+
+    const arrayCellNumber = createSequentialNumber(numberOfCell); // Richiamo la funzione che crea i numeri da inserire nelle celle
+    printCell(arrayCellNumber, numberOfCell); // Richiamo la funzione che stampa il numero di celle richieste dall'utente
+}
+
+// Funzione che crea un numero progressivo da 1 a quello che seleziona l'utente
+function createSequentialNumber(limitNumber) {
+    const arraySequentialNumber = [];
+
+    for (let i = 1; i <= limitNumber; i++) {
+        arraySequentialNumber[i - 1] = i;
+    }
+    return arraySequentialNumber;
+}
+
+// Funzione che crea una singola cella inserendo un numero all'interno
+function createSingleCell(arrayNumberInsert, i) {
+    gridCreate.innerHTML +=
+        `
+        <div class="col-3 col-sm-3 col-md-2 me-3 ms-3 d-flex justify-content-center align-items-center fs-3 fw-bold border bg-primary m-2">${arrayNumberInsert[i]}</div>
+        `;
+}
+
+// Funzione che stampa il numero di celle richieste dall'utente
+function printCell(arrayCellNumberPrint, numberOfCellPrint) {
+    let i = 0;
+
+    // Stampo il numero di celle richieste dall'utente
+    for (let z = 1; z <= numberOfCellPrint; z++) {
+        createSingleCell(arrayCellNumberPrint, i); // Richiamo la funzione che crea una singola cella
+        i++;
+    }
+}
