@@ -18,6 +18,7 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 const btnCreate = document.querySelector(".btn-create");
 const gridCreate = document.getElementById("grid-create");
 const selectDifficultyElement = document.getElementById("select-difficulty");
+const btnRetry = document.querySelector(".btn-retry");
 
 btnCreate.addEventListener("click", onBtnCreate); // Richiamo la funzione click sul pulsante
 
@@ -86,5 +87,10 @@ function selectDifficulty() {
 // Funzione che viene attivata ogni volta che l'utente clicca su una cella
 function cellClik(cell) {
     console.log(cell);
-    document.getElementById(cell).classList.add("bg-primary");
+    document.getElementById(cell).classList.add("my-bg-blue");
 }
+
+// Pulsante retry
+btnRetry.addEventListener("click", function () {
+    location.reload();
+})

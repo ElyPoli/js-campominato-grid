@@ -23,19 +23,30 @@
 </head>
 
 <body>
-    <main>
-        <div class="container text-center">
+    <header class="d-flex justify-content-center align-items-center text-primary text-center pt-3 pb-3">
+        <img src="img/mobile-logo.png" class="img-logo" alt="Logo">
+        <h1 class="fw-bold m-0 p-0">Campo Minato</h1>
+    </header>
+
+    <main class="bg-primary">
+        <div class="container ps-0 pe-0 text-center d-flex justify-content-center align-items-start border rounded-2">
             <!-- Pulsanti -->
-            <div class="mb-4">
-                <button class="btn btn-primary fs-5 mt-4 me-1 mb-4 btn-create">Crea griglia</button>
-                <select class="form-select" id="select-difficulty">
-                    <option value="100">Facile</option>
-                    <option value="81">Medio</option>
-                    <option value="49">Difficile</option>
-                </select>    
+            <div class="h-100 d-flex flex-column justify-content-center align-items-center p-4 border-end text-uppercase fw-bold fs-6">
+                <div>
+                    <button class="btn btn-primary text-uppercase fw-bold fs-6 btn-create mb-4">New game</button>
+                    <button class="btn btn-primary text-uppercase fw-bold fs-6 btn-retry mb-4">Try Again</button>
+                </div>
+                <div>
+                    <label class="form-label text-white text-uppercase fw-bold fs-6">Difficulty</label>
+                    <select class="form-select" id="select-difficulty">
+                        <option value="100">Easy</option>
+                        <option value="81">Medium</option>
+                        <option value="49">Hard</option>
+                    </select>
+                </div>
             </div>
             <!-- Risultato -->
-            <div class="d-flex justify-content-center align-items-center flex-wrap" id="grid-create">
+            <div class="d-flex justify-content-center align-items-center flex-wrap w-100 text-white" id="grid-create">
             </div>
         </div>
     </main>
