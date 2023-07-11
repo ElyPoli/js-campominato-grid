@@ -1,7 +1,11 @@
-.my-flex-basis {
-    flex-basis: calc(100% / 10);
+.my-cel-width-easy {
+    width: calc(100% / 10);
 }
 
-.my-cel-width {
-    width: calc(100% / 10);
+.my-cel-width-medium {
+    width: calc(100% / 9);
+}
+
+.my-cel-width-hard {
+    width: calc(100% / 7);
 }

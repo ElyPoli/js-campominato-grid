@@ -25,10 +25,17 @@
 <body>
     <main>
         <div class="container text-center">
-            <!-- Pulsante -->
-            <button class="btn btn-primary fs-5 mt-4 me-1 mb-4 btn-create">Crea griglia</button>
+            <!-- Pulsanti -->
+            <div class="mb-4">
+                <button class="btn btn-primary fs-5 mt-4 me-1 mb-4 btn-create">Crea griglia</button>
+                <select class="form-select" id="select-difficulty">
+                    <option value="100">Facile</option>
+                    <option value="81">Medio</option>
+                    <option value="49">Difficile</option>
+                </select>    
+            </div>
             <!-- Risultato -->
-            <div class="d-flex justify-content-center align-items-center flex-wrap my-flex-basis" id="grid-create">
+            <div class="d-flex justify-content-center align-items-center flex-wrap" id="grid-create">
             </div>
         </div>
     </main>

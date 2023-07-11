@@ -12,15 +12,18 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 - con “difficile” => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 */
 
+"use strict";
+
 // Dichiaro variabili
 const btnCreate = document.querySelector(".btn-create");
 const gridCreate = document.getElementById("grid-create");
+const selectDifficultyElement = document.getElementById("select-difficulty");
 
 btnCreate.addEventListener("click", onBtnCreate); // Richiamo la funzione click sul pulsante
 
 // Funzione click sul pulsante
 function onBtnCreate() {
-    const numberOfCell = 100;
+    const numberOfCell = parseInt(selectDifficultyElement.value);
 
     const arrayCellNumber = createSequentialNumber(numberOfCell); // Richiamo la funzione che crea i numeri da inserire nelle celle
     printCell(arrayCellNumber, numberOfCell); // Richiamo la funzione che stampa il numero di celle richieste dall'utente
@@ -42,9 +45,11 @@ function createSequentialNumber(limitNumber) {
 function createSingleCell(arrayNumberInsert, indexNumberInsert, idCellNumber) {
     gridCreate.innerHTML +=
         `
-        <div class="text-center fs-3 fw-bold my-cel-width border" id="${idCellNumber}" onclick="cellClik(${idCellNumber})">${arrayNumberInsert[indexNumberInsert]}</div>
+        <div class="text-center fs-3 fw-bold border my-single-cell" id="${idCellNumber}" onclick="cellClik(${idCellNumber})">${arrayNumberInsert[indexNumberInsert]}</div>
         `;
     // Per ogni cella che creo aggiugno una funzione (cellClik) che si attiva al click della cella corrispondente
+
+    selectDifficulty(); // Richiamo la funzione che in base alla difficoltà selezionata aggiunge alle celle una classe
 }
 
 // Funzione che stampa il numero di celle richieste dall'utente
@@ -55,6 +60,26 @@ function printCell(arrayCellNumberPrint, numberOfCellPrint) {
     for (let z = 1; z <= numberOfCellPrint; z++) {
         createSingleCell(arrayCellNumberPrint, i, z); // Richiamo la funzione che crea una singola cella
         i++;
+    }
+}
+
+// Funzione che in base alla difficoltà selezionata aggiunge alle celle una classe
+function selectDifficulty() {
+    const numberOfCell = parseInt(selectDifficultyElement.value);
+
+    const widthCells = document.querySelectorAll(".my-single-cell");
+    let easy = 100;
+    let medium = 81;
+
+    // Scorro su tutti gli elementi che hanno la classe ".my-single-cell" e in base alla difficoltà selezionata aggiungo ad ogni cella una larghezza differente
+    for(let i = 0; i < widthCells.length; i++) {
+        if (numberOfCell === easy) {
+            widthCells[i].classList.add("my-cel-width-easy");
+        } else if (numberOfCell === medium) {
+            widthCells[i].classList.add("my-cel-width-medium");
+        } else {
+            widthCells[i].classList.add("my-cel-width-hard");
+        }
     }
 }
 
