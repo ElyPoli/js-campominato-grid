@@ -1,0 +1,7 @@
+.my-flex-basis {
+    flex-basis: calc(100% / 10);
+}
+
+.my-cel-width {
+    width: calc(100% / 10);
+}

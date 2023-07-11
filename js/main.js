@@ -18,13 +18,14 @@ const gridCreate = document.getElementById("grid-create");
 
 btnCreate.addEventListener("click", onBtnCreate); // Richiamo la funzione click sul pulsante
 
-
 // Funzione click sul pulsante
 function onBtnCreate() {
     const numberOfCell = 100;
 
     const arrayCellNumber = createSequentialNumber(numberOfCell); // Richiamo la funzione che crea i numeri da inserire nelle celle
     printCell(arrayCellNumber, numberOfCell); // Richiamo la funzione che stampa il numero di celle richieste dall'utente
+
+    btnCreate.classList.add("disabled"); // Una volta cliccato il pulsante che crea la griglia lo disabilito
 }
 
 // Funzione che crea un numero progressivo da 1 a quello che seleziona l'utente
@@ -38,11 +39,12 @@ function createSequentialNumber(limitNumber) {
 }
 
 // Funzione che crea una singola cella inserendo un numero all'interno
-function createSingleCell(arrayNumberInsert, i) {
+function createSingleCell(arrayNumberInsert, indexNumberInsert, idCellNumber) {
     gridCreate.innerHTML +=
         `
-        <div class="col-3 col-sm-3 col-md-2 me-3 ms-3 d-flex justify-content-center align-items-center fs-3 fw-bold border bg-primary m-2">${arrayNumberInsert[i]}</div>
+        <div class="text-center fs-3 fw-bold my-cel-width border" id="${idCellNumber}" onclick="cellClik(${idCellNumber})">${arrayNumberInsert[indexNumberInsert]}</div>
         `;
+    // Per ogni cella che creo aggiugno una funzione (cellClik) che si attiva al click della cella corrispondente
 }
 
 // Funzione che stampa il numero di celle richieste dall'utente
@@ -51,7 +53,13 @@ function printCell(arrayCellNumberPrint, numberOfCellPrint) {
 
     // Stampo il numero di celle richieste dall'utente
     for (let z = 1; z <= numberOfCellPrint; z++) {
-        createSingleCell(arrayCellNumberPrint, i); // Richiamo la funzione che crea una singola cella
+        createSingleCell(arrayCellNumberPrint, i, z); // Richiamo la funzione che crea una singola cella
         i++;
     }
+}
+
+// Funzione che viene attivata ogni volta che l'utente clicca su una cella
+function cellClik(cell) {
+    console.log(cell);
+    document.getElementById(cell).classList.add("bg-primary");
 }
