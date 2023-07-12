@@ -35,12 +35,26 @@ main > div {
 
 .my-cel-width-medium {
     width: calc(100% / 9);
+    aspect-ratio: 4/3;
 }
 
 .my-cel-width-hard {
     width: calc(100% / 7);
+    aspect-ratio: 4/3;
 }
 
 .my-bg-blue {
-    background-color: #4cb9fa;
+    background-color: #3a9a7f;
+}
+
+#grid-create {
+    background-image: url("../img/img-grass.png");
+    background-size: contain;
+}
+
+.form-select {
+    color: white;
+    background-color: #3a846d;
+    font-weight: bold;
+    text-transform: uppercase;
 }
