@@ -15,79 +15,71 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 "use strict";
 
 // Dichiaro variabili
-const btnCreate = document.querySelector(".btn-create");
-const gridCreate = document.getElementById("grid-create");
-const selectDifficultyElement = document.getElementById("select-difficulty");
+const gridContainer = document.querySelector("#grid-container");
+const selectDifficulty = document.getElementById("select-difficulty");
+const btnNewGame = document.querySelector(".btn-new-game");
 const btnRetry = document.querySelector(".btn-retry");
 
-btnCreate.addEventListener("click", onBtnCreate); // Richiamo la funzione click sul pulsante
+btnNewGame.addEventListener("click", onBtnNewGame);
 
-// Funzione click sul pulsante
-function onBtnCreate() {
-    const numberOfCell = parseInt(selectDifficultyElement.value);
+// Click su "New Game"
+function onBtnNewGame() {
+    const numberOfCell = parseInt(selectDifficulty.value);
 
-    const arrayCellNumber = createSequentialNumber(numberOfCell); // Richiamo la funzione che crea i numeri da inserire nelle celle
-    printCell(arrayCellNumber, numberOfCell); // Richiamo la funzione che stampa il numero di celle richieste dall'utente
+    btnNewGame.classList.add("disabled");
 
-    btnCreate.classList.add("disabled"); // Una volta cliccato il pulsante che crea la griglia lo disabilito
+    gridPrint(numberOfCell);
 }
 
-// Funzione che crea un numero progressivo da 1 a quello che seleziona l'utente
-function createSequentialNumber(limitNumber) {
-    const arraySequentialNumber = [];
+// Crea singola cella
+function cellCreate() {
+    const cell = document.createElement("div");
+    cell.classList.add("border");
 
-    for (let i = 1; i <= limitNumber; i++) {
-        arraySequentialNumber[i - 1] = i;
+    cell.addEventListener("click", cellClicked); // richiamo la funzione del click della cella
+
+    return cell;
+}
+
+// Crea la griglia
+function gridCreate(numberOfCell) {
+    const grid = [];
+
+    gameDifficulty(numberOfCell); // modifico la grandezza della griglia in base alla difficoltà selezionata
+
+    for (let i = 0; i < numberOfCell; i++) {
+        let cell = cellCreate();
+
+        cell.textContent = i;
+        grid.push(cell);
     }
-    return arraySequentialNumber;
+    return grid;
 }
 
-// Funzione che crea una singola cella inserendo un numero all'interno
-function createSingleCell(arrayNumberInsert, indexNumberInsert, idCellNumber) {
-    gridCreate.innerHTML +=
-        `
-        <div class="text-center fs-3 fw-bold border my-single-cell" id="${idCellNumber}" onclick="cellClik(${idCellNumber})">${arrayNumberInsert[indexNumberInsert]}</div>
-        `;
-    // Per ogni cella che creo aggiugno una funzione (cellClik) che si attiva al click della cella corrispondente
-
-    selectDifficulty(); // Richiamo la funzione che in base alla difficoltà selezionata aggiunge alle celle una classe
-}
-
-// Funzione che stampa il numero di celle richieste dall'utente
-function printCell(arrayCellNumberPrint, numberOfCellPrint) {
-    let i = 0;
-
-    // Stampo il numero di celle richieste dall'utente
-    for (let z = 1; z <= numberOfCellPrint; z++) {
-        createSingleCell(arrayCellNumberPrint, i, z); // Richiamo la funzione che crea una singola cella
-        i++;
-    }
-}
-
-// Funzione che in base alla difficoltà selezionata aggiunge alle celle una classe
-function selectDifficulty() {
-    const numberOfCell = parseInt(selectDifficultyElement.value);
-
-    const widthCells = document.querySelectorAll(".my-single-cell");
-    let easy = 100;
-    let medium = 81;
-
-    // Scorro su tutti gli elementi che hanno la classe ".my-single-cell" e in base alla difficoltà selezionata aggiungo ad ogni cella una larghezza differente
-    for(let i = 0; i < widthCells.length; i++) {
-        if (numberOfCell === easy) {
-            widthCells[i].classList.add("my-cel-width-easy");
-        } else if (numberOfCell === medium) {
-            widthCells[i].classList.add("my-cel-width-medium");
-        } else {
-            widthCells[i].classList.add("my-cel-width-hard");
-        }
+// Aggiunge una classe in base al numero di celle da creare
+function gameDifficulty(numberOfCell) {
+    if (numberOfCell === 100) {
+        gridContainer.classList.add("my-cel-width-easy");
+    } else if (numberOfCell === 81) {
+        gridContainer.classList.add("my-cel-width-medium");
+    } else {
+        gridContainer.classList.add("my-cel-width-hard");
     }
 }
 
-// Funzione che viene attivata ogni volta che l'utente clicca su una cella
-function cellClik(cell) {
-    console.log(cell);
-    document.getElementById(cell).classList.add("my-bg-blue");
+// Stampa la griglia
+function gridPrint(numberOfCell) {
+    const grid = gridCreate(numberOfCell);
+
+    for (let i = 0; i < grid.length; i++) {
+        gridContainer.append(grid[i]);
+    }
+}
+
+// Click della cella
+function cellClicked() {
+    this.classList.add("my-cell");
+    console.log(this.textContent);
 }
 
 // Pulsante retry

@@ -28,28 +28,30 @@ main > div {
     width: 50px;
 }
 
-.my-cel-width-easy {
+.my-cel-width-easy > div {
     width: calc(100% / 10);
     aspect-ratio: 4/3;
 }
 
-.my-cel-width-medium {
+.my-cel-width-medium > div {
     width: calc(100% / 9);
     aspect-ratio: 4/3;
 }
 
-.my-cel-width-hard {
+.my-cel-width-hard > div {
     width: calc(100% / 7);
     aspect-ratio: 4/3;
 }
 
-.my-bg-blue {
+.my-cell {
     background-color: #3a9a7f;
+    pointer-events: none;
 }
 
-#grid-create {
+#grid-container {
     background-image: url("../img/img-grass.png");
     background-size: contain;
+    position: relative;
 }
 
 .form-select {
